@@ -1,0 +1,4 @@
+.claude/
+packages/server/data/
+*.db
+*.db-journal
