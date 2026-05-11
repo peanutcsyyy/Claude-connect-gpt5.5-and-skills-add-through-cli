@@ -4,7 +4,7 @@ This repository packages a visible multi-agent workflow where Hermes acts as the
 
 ## Included
 
-- `实时检测Aegent工作流.md`: public-facing Chinese overview for the workflow
+- `实时检测Angent工作流.md`: public-facing Chinese overview for the workflow
 - `skills/hermes-claude-visible-orchestrator/SKILL.md`: the reusable Hermes skill definition
 
 ## What It Does
