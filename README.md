@@ -1,75 +1,52 @@
-# Hermes Claude Visible Orchestrator
+# Claude Desktop GPT-5.5 Gateway
 
-Visible multi-agent workflow for Windows + WSL where Hermes coordinates and Claude Code does the hands-on coding in a real terminal window.
+Windows helper and documentation for running Claude Desktop with an isolated third-party `3p` gateway profile.
 
-## Features
+The default example registers `gpt-5.5` in Claude Desktop and shows it as `GPT-5.5 Max`.
 
-- visible Claude Code terminal sessions
-- Hermes-as-orchestrator workflow
-- WSL + tmux session model
-- reusable Windows bridge scripts
-- privacy-safe local configuration pattern
-- example Hermes trigger hook
+## What It Includes
 
-## Repository Layout
-
-- `README.md`: project overview
-- `LICENSE`: MIT license
-- `实时检测Angent工作流.md`: Chinese overview
-- `config/agent-workflow.example.json`: config template
-- `config/claude-desktop-gateway.example.json`: Claude Desktop gateway template
-- `docs/SETUP.md`: installation and setup
-- `docs/USAGE.md`: usage and privacy guidance
-- `docs/TROUBLESHOOTING.md`: common failure modes
-- `docs/HERMES_INTEGRATION.md`: how to wire this into Hermes
-- `docs/DEMO.md`: minimal end-to-end demo
-- `docs/CLAUDE_DESKTOP_3P_GATEWAY.md`: isolated Claude Desktop 3P gateway setup
-- `skills/hermes-claude-visible-orchestrator/SKILL.md`: Hermes skill definition
-- `scripts/windows/`: Windows bridge scripts
-- `scripts/windows/configure_claude_desktop_gateway.ps1`: Claude Desktop gateway setup helper
-- `scripts/wsl/`: WSL bridge script
-- `examples/hermes_claude_monitor_hook.py`: portable trigger example
+- an isolated Claude Desktop user data directory pattern
+- a PowerShell setup helper for Windows
+- a privacy-safe local config template
+- UTF-8 without BOM JSON writing
+- optional `/v1/messages` route verification
+- Desktop shortcut creation with `--user-data-dir`
 
 ## Quick Start
 
+Copy the example config:
+
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\windows\install.ps1
+Copy-Item .\config\claude-desktop-gateway.example.json .\config\claude-desktop-gateway.local.json
 ```
 
-Then:
+Edit `config\claude-desktop-gateway.local.json` with your own gateway URL and API key.
 
-1. review `config/agent-workflow.local.json`
-2. start `scripts/windows/claude_bridge_helper.ps1`
-3. create a Claude tmux session in WSL
-4. launch Claude in that session
-5. emit a trigger file or call `claude_tmux_monitor.ps1`
+Run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\windows\configure_claude_desktop_gateway.ps1
+```
 
 ## Docs
 
-- [Setup](docs/SETUP.md)
-- [Usage](docs/USAGE.md)
-- [Troubleshooting](docs/TROUBLESHOOTING.md)
-- [Hermes Integration](docs/HERMES_INTEGRATION.md)
-- [Minimal Demo](docs/DEMO.md)
 - [Claude Desktop 3P Gateway](docs/CLAUDE_DESKTOP_3P_GATEWAY.md)
 
 ## Privacy
 
-This repo is structured so people can publish the workflow without publishing their own machine details.
+This repo is structured so people can use the workflow without publishing their own machine details.
 
-- machine-specific settings belong in `config/agent-workflow.local.json`
-- `config/*.local.json` is ignored by Git
-- local startup helpers, logs, databases, and tokens should stay out of version control
 - third-party gateway API keys belong only in `config/claude-desktop-gateway.local.json`
+- `config/*.local.json` is ignored by Git
+- logs, cache directories, browser state, and tokens should stay out of version control
 
 ## Safety
 
-The example workflow is optimized for low-friction local experimentation, not for high-security environments.
+This project is for user-owned local configuration. Do not use it to bypass provider, account, workplace, product, or legal restrictions.
 
-- review Claude permission flags before using them on sensitive repositories
-- prefer tighter permissions if you do not need full local autonomy
-- do not run this workflow on machines or directories you do not trust
+The script can confirm that Claude Desktop requested `gpt-5.5` and that the gateway reported `gpt-5.5`. Whether that is a "full" upstream model depends on the gateway provider's actual routing and limits.
 
 ## Status
 
-This is now a reusable open-source starter for the workflow, not just a local note dump. Most users will still need to adapt the Hermes-side trigger integration for their own environment.
+Clean open-source starter for Claude Desktop third-party gateway setup on Windows.

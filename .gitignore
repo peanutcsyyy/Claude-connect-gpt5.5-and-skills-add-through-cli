@@ -1,7 +1,9 @@
-.claude/
-packages/server/data/
 *.db
 *.db-journal
 config/*.local.json
 __pycache__/
 *.pyc
+.claude/
+Claude-3p/
+logs/
+*.bak
