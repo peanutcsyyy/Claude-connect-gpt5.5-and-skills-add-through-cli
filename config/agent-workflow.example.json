@@ -1,0 +1,5 @@
+{
+  "bridgeDir": "%USERPROFILE%\\.claude-bridge",
+  "distro": "Ubuntu",
+  "helperStartupName": "claude_bridge_helper.cmd"
+}

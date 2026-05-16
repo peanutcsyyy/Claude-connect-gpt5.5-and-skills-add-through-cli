@@ -34,14 +34,14 @@ Claude Code should do the primary coding, debugging, editing, and verification w
 - Default to maximum Claude permissions on this machine unless the user explicitly asks for tighter controls.
 - If the visible Claude launch fails, say so explicitly before falling back.
 
-## Machine-Specific Launch Path
+## Bridge Layout
 
-This machine uses Windows + WSL with local bridge scripts:
+This workflow assumes a Windows + WSL bridge, but the concrete paths should come from the local install, not from hardcoded user directories.
 
-- Windows monitor launcher: `C:\Users\c\claude_tmux_monitor.ps1`
-- Windows attach wrapper: `C:\Users\c\claude_tmux_attach.cmd`
-- WSL attach script: `/home/c/.claude-bridge/attach_tmux.sh`
-- Desktop bridge helper: `C:\Users\c\.claude-bridge\claude_bridge_helper.ps1`
+- Windows monitor launcher: `<repo>/scripts/windows/claude_tmux_monitor.ps1`
+- Windows attach wrapper: `<repo>/scripts/windows/claude_tmux_attach.cmd`
+- WSL attach script: `<repo>/scripts/wsl/attach_tmux.sh`
+- Desktop bridge helper: `<repo>/scripts/windows/claude_bridge_helper.ps1`
 
 Hermes may trigger the visible terminal through the bridge helper, but if needed it can still call the monitor launcher directly.
 
@@ -59,13 +59,15 @@ Use a descriptive session name, for example:
 
 Use the machine's monitor launcher right after the tmux session is created.
 
-### 3. Launch Claude Code with maximum permissions
+### 3. Launch Claude Code with the permissions your environment actually needs
 
-Launch Claude from the project directory with:
+The highest-autonomy local mode may use:
 
 - `--permission-mode bypassPermissions`
 - `--dangerously-skip-permissions`
 - `--allowedTools default`
+
+But safer defaults are recommended for shared or sensitive environments.
 
 ### 4. Handle first-run dialogs
 

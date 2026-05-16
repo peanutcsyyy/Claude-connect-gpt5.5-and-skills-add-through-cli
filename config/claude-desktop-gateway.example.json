@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://example-gateway.invalid",
+  "apiKey": "replace-with-your-api-key",
+  "modelName": "gpt-5.5",
+  "labelOverride": "GPT-5.5 Max",
+  "userDataDir": "%LOCALAPPDATA%\\Claude-3p",
+  "shortcutName": "Claude GPT-5.5 Max"
+}
